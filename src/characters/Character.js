@@ -53,6 +53,7 @@ function Character(){
         <button
             onClick={() => setGold(gold - 1)}
         >Gold Down</button>
+        
         </>
     )
 }
