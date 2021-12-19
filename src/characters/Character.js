@@ -1,5 +1,6 @@
 import '../index.css'
 import { useState } from 'react';
+import { nanoid } from 'nanoid';
 import Summons from './Summons';
 
 function Character(){
@@ -36,10 +37,13 @@ function Character(){
         console.log('add summon');
         setRenderSummon(true);
     }
-
+    function handleLogClick(e){
+        e.preventDefault();
+        console.log(summons);
+    }
     return(
         <div id="character-container" className='
-        grid grid-rows-4 grid-flow-col
+        grid grid-rows-5 grid-flow-col
         '>
         <div className='pt-5 bg-red-400'>
             <h1 className='grid justify-items-center'>Health</h1>
@@ -86,16 +90,31 @@ function Character(){
             </div>
         </div>
         
-        {summons.map((summon) => {
+        {/* map all summons to page */}
+        {summons.map(summon => {    // summon is the object in the array
+            return( 
+                <Summons
+                    key={nanoid()}
+                    summon={summon}
+                    setSummonHealth={setSummonHealth}
+                />
+            )
+        })}
+
+        {/* {allSummons.map((summon) => {
+            return(
             <Summons 
-                key={summon.id}
+                id={id}
                 health={summonHealth}
                 setHealth={setSummonHealth}
             />
-        })}
+            )
+        })}      */}
         
-        
-        <button>Add Summon</button>
+        <button
+            onClick={() => setSummons([...summons, {id: nanoid(), health: summonHealth}])}
+        >Add Summon</button>
+        <button onClick={handleLogClick}>log</button>
 
         
         
