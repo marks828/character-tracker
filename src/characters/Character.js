@@ -12,7 +12,7 @@ function Character(){
     const [experience, setExperience] = useState(0);
     const [gold, setGold] = useState(0);
     const [summonHealth, setSummonHealth] = useState(0);
-    const [renderSummon, setRenderSummon] = useState(false);
+    // const [renderSummon, setRenderSummon] = useState(false);
     const [summons, setSummons] = useState(allSummons);
 
     
@@ -32,11 +32,12 @@ function Character(){
         setExperience(experience - 1);
     }
 
-    function handleAddSummonClick(e){
-        e.preventDefault();
-        console.log('add summon');
-        setRenderSummon(true);
-    }
+    // function handleAddSummonClick(e){
+    //     e.preventDefault();
+    //     console.log('add summon');
+    //     setRenderSummon(true);
+    // }
+    
     function handleLogClick(e){
         e.preventDefault();
         console.log(summons);
