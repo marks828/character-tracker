@@ -4,10 +4,17 @@ import Summons from './Summons';
 
 function Character(){
 
+    const allSummons = []
+
+
     const [health, setHealth] = useState(0);
     const [experience, setExperience] = useState(0);
     const [gold, setGold] = useState(0);
+    const [summonHealth, setSummonHealth] = useState(0);
+    const [renderSummon, setRenderSummon] = useState(false);
+    const [summons, setSummons] = useState(allSummons);
 
+    
     function healthUp(){
         setHealth(health + 1);
     }
@@ -27,59 +34,72 @@ function Character(){
     function handleAddSummonClick(e){
         e.preventDefault();
         console.log('add summon');
+        setRenderSummon(true);
     }
 
-
-
     return(
-        <div id="character-container" className='sm:grid grid-rows-4 grid-flow-col gap-4'>
-        <div className='py-5 bg-red-400'>
-            <h1 className='sm:grid justify-items-center'>Health</h1>
-            <div className='sm:grid grid-cols-3 gap-2 justify-items-center place-items-center'>
+        <div id="character-container" className='
+        grid grid-rows-4 grid-flow-col
+        '>
+        <div className='pt-5 bg-red-400'>
+            <h1 className='grid justify-items-center'>Health</h1>
+            <div className='grid grid-cols-3 gap-2 justify-items-center place-items-center'>
                 <button
+                    className='text-5xl'
                     onClick={healthDown}
-                >Health Down</button>
-                <p className=''>{health}</p>
-                <button
+                >-</button>
+                <p className='text-5xl'>{health}</p>
+                <button 
+                    className='text-5xl'
                     onClick={healthUp}
-                >Health Up</button>
+                >+</button>
             </div>
         </div>
         
-        <div className='py-5 bg-blue-500'>
-            <h1 className='sm:grid justify-items-center'>Experience</h1>
-            <div className='sm:grid grid-cols-3 gap-2 justify-items-center place-items-center'>
-                <button className=''
+        <div className='pt-5 bg-blue-500 w-full'>
+            <h1 className='grid justify-items-center'>Experience</h1>
+            <div className='grid grid-cols-3 gap-2 justify-items-center place-items-center'>
+                <button 
+                    className='text-5xl'
                     onClick={experienceDown}
-                >Experience Down</button>
-                <p>{experience}</p>
-                <button
+                >-</button>
+                <p className='text-5xl'>{experience}</p>
+                <button 
+                    className='text-5xl'
                     onClick={experienceUp}
-                >Experience Up</button>
+                >+</button>
             </div>
         </div>
         
         <div className='py-5 bg-amber-200'>
-            <h1 className='sm:grid justify-items-center'>Gold</h1>
-            <div className='sm:grid grid-cols-3 gap-2 justify-items-center place-items-center'>
-                <button
+            <h1 className='grid justify-items-center'>Gold</h1>
+            <div className='grid grid-cols-3 gap-2 justify-items-center place-items-center'>
+                <button 
+                    className='text-5xl'
                     onClick={() => setGold(gold - 1)}
-                >Gold Down</button>
-                <p>{gold}</p>
-                <button
+                >-</button>
+                <p className='text-5xl'>{gold}</p>
+                <button 
+                    className='text-5xl'
                     onClick={() => setGold(gold + 1)}
-                >Gold Up</button>
+                >+</button>
             </div>
         </div>
         
-        <button onClick={handleAddSummonClick}>Add Summon</button>
+        {summons.map((summon) => {
+            <Summons 
+                key={summon.id}
+                health={summonHealth}
+                setHealth={setSummonHealth}
+            />
+        })}
+        
+        
+        <button>Add Summon</button>
 
         
         
-        <Summons 
-            health={health}
-            setHealth={setHealth}
-        />
+        
         </div>
     )
 }
