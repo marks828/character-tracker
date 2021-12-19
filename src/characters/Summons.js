@@ -1,6 +1,12 @@
 export default function Summons(props) {
 
 
+    function deleteSummon(id) {
+        const deleteSummon = props.summons.filter(summon => summon.id !== id);
+        console.log(deleteSummon);
+        props.setSummons(deleteSummon);
+    }
+
     return(
         <div className='py-5 bg-green-200'>
             <h1 className='sm:grid justify-items-center'>Summon Health</h1>
@@ -15,6 +21,7 @@ export default function Summons(props) {
                     onClick={() => props.summon.setHealth(props.summon.health + 1)}
                 >+</button>
             </div>
+            <button onClick={() => deleteSummon(props.summon.id)}>Kill</button>
         </div>
     )
 

@@ -5,7 +5,7 @@ import Summons from './Summons';
 
 function Character(){
 
-    const allSummons = []
+    
 
 
     const [health, setHealth] = useState(0);
@@ -13,7 +13,7 @@ function Character(){
     const [gold, setGold] = useState(0);
     const [summonHealth, setSummonHealth] = useState(0);
     // const [renderSummon, setRenderSummon] = useState(false);
-    const [summons, setSummons] = useState(allSummons);
+    const [summons, setSummons] = useState([]);
 
     
     function healthUp(){
@@ -37,11 +37,12 @@ function Character(){
     //     console.log('add summon');
     //     setRenderSummon(true);
     // }
-    
+
     function handleLogClick(e){
         e.preventDefault();
         console.log(summons);
     }
+
     return(
         <div id="character-container" className='
         grid grid-rows-5 grid-flow-col
@@ -97,7 +98,9 @@ function Character(){
                 <Summons
                     key={nanoid()}
                     summon={summon}
+                    summons={summons}
                     setSummonHealth={setSummonHealth}
+                    setSummons={setSummons}
                 />
             )
         })}
