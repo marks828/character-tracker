@@ -99,7 +99,6 @@ function Character(){
                     key={nanoid()}
                     summon={summon}
                     summons={summons}
-                    setSummonHealth={setSummonHealth}
                     setSummons={setSummons}
                 />
             )
