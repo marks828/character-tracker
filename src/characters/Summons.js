@@ -5,7 +5,7 @@ export default function Summons(props) {
     const [summonHealth, setSummonHealth] = useState(0);
 
     function SummonHealthUp() {
-        const increaseSummonHealth = props.summons.map(summon => {
+        props.summons.map(summon => {
             if(summon.id === props.summon.id){
                 setSummonHealth(summonHealth + 1);
             }
@@ -14,7 +14,12 @@ export default function Summons(props) {
     }
 
     function summonHealthDown() {
-        setSummonHealth(summonHealth - 1);
+        props.summons.map(summon => {
+            if(summon.id === props.summon.id){
+                setSummonHealth(summonHealth - 1);
+            }
+            return summon;
+        });
     }
 
     function deleteSummon(id) {
