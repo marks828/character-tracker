@@ -1,7 +1,7 @@
 import '../index.css'
 import { useState } from 'react';
 import { nanoid } from 'nanoid';
-import Summons from './Summons';
+
 
 function Character(){
 
@@ -12,7 +12,6 @@ function Character(){
     const [experience, setExperience] = useState(0);
     const [gold, setGold] = useState(0);
     const [summonHealth, setSummonHealth] = useState(0);
-    // const [renderSummon, setRenderSummon] = useState(false);
     const [summons, setSummons] = useState([]);
 
     
@@ -32,6 +31,22 @@ function Character(){
         setExperience(experience - 1);
     }
 
+    function SummonHealthUp(id){
+        const increaseSummonHealth = summons.map(summon => {
+            if(id === summon.id){
+                const healthPlusOne = setSummonHealth(summon.health + 1);
+                console.log(summon)
+                return {...summon, health: healthPlusOne};
+            }
+            return summon;
+        })
+        setSummons(increaseSummonHealth);
+    }
+    
+    function SummonHealthDown(id){
+        console.log(id)
+    }
+
     // function handleAddSummonClick(e){
     //     e.preventDefault();
     //     console.log('add summon');
@@ -41,6 +56,13 @@ function Character(){
     function handleLogClick(e){
         e.preventDefault();
         console.log(summons);
+    }
+
+
+    function deleteSummon(id) {
+        const deleteSummon = summons.filter(summon => summon.id !== id);
+        console.log(deleteSummon);
+        setSummons(deleteSummon);
     }
 
     return(
@@ -92,8 +114,31 @@ function Character(){
             </div>
         </div>
         
-        {/* map all summons to page */}
+
         {summons.map(summon => {    // summon is the object in the array
+            return(
+                <div className='py-5 bg-green-200'>
+                    <h1 className='sm:grid justify-items-center'>Summon Health</h1>
+                    <div className='sm:grid grid-cols-3 gap-2 justify-items-center place-items-center'>
+                        <button
+                            className='text-5xl'
+                            onClick={SummonHealthDown}
+                        >-</button>
+                        <p className='text-5xl' id={summon.id}>{summonHealth}</p>
+                        <button
+                            className='text-5xl'
+                            onClick={SummonHealthUp}
+                        >+</button>
+                    </div>
+                    <button onClick={() => deleteSummon(summon.id)}>Kill</button>
+                </div>
+            )
+        })}
+
+
+
+        {/* map all summons to page */}
+        {/* {summons.map(summon => {    // summon is the object in the array
             return( 
                 <Summons
                     key={nanoid()}
@@ -102,7 +147,7 @@ function Character(){
                     setSummons={setSummons}
                 />
             )
-        })}
+        })} */}
 
         {/* {allSummons.map((summon) => {
             return(
@@ -115,7 +160,7 @@ function Character(){
         })}      */}
         
         <button
-            onClick={() => setSummons([...summons, {id: nanoid(), health: summonHealth}])}
+            onClick={() => setSummons([...summons, {id: nanoid(), summonHealth: summonHealth}])}
         >Add Summon</button>
         <button onClick={handleLogClick}>log</button>
 
