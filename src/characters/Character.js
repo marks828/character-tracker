@@ -36,7 +36,7 @@ function Character(){
             if(id === summon.id){
                 const healthPlusOne = setSummonHealth(summon.health + 1);
                 console.log(summon)
-                return {...summon, health: healthPlusOne};
+                return {...summon, summonHealth: healthPlusOne};
             }
             return summon;
         })
@@ -122,12 +122,12 @@ function Character(){
                     <div className='sm:grid grid-cols-3 gap-2 justify-items-center place-items-center'>
                         <button
                             className='text-5xl'
-                            onClick={SummonHealthDown}
+                            onClick={() => SummonHealthDown(summon.id)}
                         >-</button>
                         <p className='text-5xl' id={summon.id}>{summonHealth}</p>
                         <button
                             className='text-5xl'
-                            onClick={SummonHealthUp}
+                            onClick={() => SummonHealthUp(summon.id)}
                         >+</button>
                     </div>
                     <button onClick={() => deleteSummon(summon.id)}>Kill</button>
