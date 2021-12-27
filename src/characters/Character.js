@@ -11,7 +11,6 @@ function Character(){
     const [health, setHealth] = useState(0);
     const [experience, setExperience] = useState(0);
     const [gold, setGold] = useState(0);
-    const [summonHealth, setSummonHealth] = useState(0);
     const [summons, setSummons] = useState([]);
 
     
@@ -33,10 +32,10 @@ function Character(){
 
     function SummonHealthUp(id){
         const increaseSummonHealth = summons.map(summon => {
-            if(id === summon.id){
-                const healthPlusOne = setSummonHealth(summon.health + 1);
+            if(summon.id === id){
+                
                 console.log(summon)
-                return {...summon, summonHealth: healthPlusOne};
+                return {...summon, summonHealth: summon.summonHealth + 1};
             }
             return summon;
         })
@@ -124,7 +123,7 @@ function Character(){
                             className='text-5xl'
                             onClick={() => SummonHealthDown(summon.id)}
                         >-</button>
-                        <p className='text-5xl' id={summon.id}>{summonHealth}</p>
+                        <p className='text-5xl' id={summon.id}>{summon.summonHealth}</p>
                         <button
                             className='text-5xl'
                             onClick={() => SummonHealthUp(summon.id)}
@@ -160,7 +159,7 @@ function Character(){
         })}      */}
         
         <button
-            onClick={() => setSummons([...summons, {id: nanoid(), summonHealth: summonHealth}])}
+            onClick={() => setSummons([...summons, {id: nanoid(), summonHealth: 0}])}
         >Add Summon</button>
         <button onClick={handleLogClick}>log</button>
 
