@@ -30,21 +30,7 @@ function Character(){
         setExperience(experience - 1);
     }
 
-    function SummonHealthUp(id){
-        const increaseSummonHealth = summons.map(summon => {
-            if(summon.id === id){
-                
-                console.log(summon)
-                return {...summon, summonHealth: summon.summonHealth + 1};
-            }
-            return summon;
-        })
-        setSummons(increaseSummonHealth);
-    }
     
-    function SummonHealthDown(id){
-        console.log(id)
-    }
 
     // function handleAddSummonClick(e){
     //     e.preventDefault();
@@ -57,12 +43,6 @@ function Character(){
         console.log(summons);
     }
 
-
-    function deleteSummon(id) {
-        const deleteSummon = summons.filter(summon => summon.id !== id);
-        console.log(deleteSummon);
-        setSummons(deleteSummon);
-    }
 
     return(
         <div id="character-container" className='
