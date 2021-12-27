@@ -43,7 +43,15 @@ function Character(){
     }
     
     function SummonHealthDown(id){
-        console.log(id)
+        const decreaseSummonHealth = summons.map(summon => {
+            if(summon.id === id){
+                
+                console.log(summon)
+                return {...summon, summonHealth: summon.summonHealth + 1};
+            }
+            return summon;
+        })
+        setSummons(decreaseSummonHealth);
     }
 
     // function handleAddSummonClick(e){
