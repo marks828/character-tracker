@@ -47,7 +47,7 @@ function Character(){
             if(summon.id === id){
                 
                 console.log(summon)
-                return {...summon, summonHealth: summon.summonHealth + 1};
+                return {...summon, summonHealth: summon.summonHealth - 1};
             }
             return summon;
         })
