@@ -164,7 +164,7 @@ function Character(){
             className='my-10 mx-auto text-2xl'
             onClick={() => setSummons([...summons, {id: nanoid(), summonHealth: 0}])}
         >Add Summon</button>
-        {/* <button onClick={handleLogClick}>log</button> */}
+        <button onClick={handleLogClick}>log</button>
         </div>
 
         <div id="character-container" className='
