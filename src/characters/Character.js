@@ -73,10 +73,17 @@ function Character(){
     }
 
     return(
+        <>
         <div id="character-container" className='
-        grid grid-rows-5 grid-flow-col
+            grid grid-cols-1 
+            sm:grid-cols-1 
+            md:grid-cols-3 
+            lg:grid-cols-3 
+            xl:grid-cols-3 
+            sm:gap-0
+            md:gap-5
         '>
-        <div className='pt-5 bg-red-400'>
+        <div className='py-5 bg-red-400'>
             <h1 className='grid justify-items-center'>Health</h1>
             <div className='grid grid-cols-3 gap-2 justify-items-center place-items-center'>
                 <button
@@ -91,7 +98,7 @@ function Character(){
             </div>
         </div>
         
-        <div className='pt-5 bg-blue-500 w-full'>
+        <div className='py-5 bg-blue-500 w-full'>
             <h1 className='grid justify-items-center'>Experience</h1>
             <div className='grid grid-cols-3 gap-2 justify-items-center place-items-center'>
                 <button 
@@ -122,25 +129,7 @@ function Character(){
         </div>
         
 
-        {summons.map(summon => {    // summon is the object in the array
-            return(
-                <div className='py-5 bg-green-200'>
-                    <h1 className='sm:grid justify-items-center'>Summon Health</h1>
-                    <div className='sm:grid grid-cols-3 gap-2 justify-items-center place-items-center'>
-                        <button
-                            className='text-5xl'
-                            onClick={() => SummonHealthDown(summon.id)}
-                        >-</button>
-                        <p className='text-5xl' id={summon.id}>{summon.summonHealth}</p>
-                        <button
-                            className='text-5xl'
-                            onClick={() => SummonHealthUp(summon.id)}
-                        >+</button>
-                    </div>
-                    <button onClick={() => deleteSummon(summon.id)}>Kill</button>
-                </div>
-            )
-        })}
+        
 
 
 
@@ -166,15 +155,55 @@ function Character(){
             )
         })}      */}
         
+
+        </div>
+        <div 
+            className='grid'
+        >
         <button
+            className='my-10 mx-auto text-2xl'
             onClick={() => setSummons([...summons, {id: nanoid(), summonHealth: 0}])}
         >Add Summon</button>
-        <button onClick={handleLogClick}>log</button>
-
-        
-        
-        
+        {/* <button onClick={handleLogClick}>log</button> */}
         </div>
+
+        <div id="character-container" className='
+            grid grid-cols-1 
+            sm:grid-cols-1 
+            md:grid-cols-3 
+            lg:grid-cols-3 
+            xl:grid-cols-3 
+            sm:gap-0
+            md:gap-5
+        '>
+
+            {summons.map(summon => {    // summon is the object in the array
+            return(
+                <div className='grid py-5 bg-green-200'>
+                    <h1 className='sm:grid justify-items-center'>Summon Health</h1>
+                    <div className='sm:grid grid-cols-3 gap-2 justify-items-center place-items-center'>
+                        <button
+                            className='text-5xl'
+                            onClick={() => SummonHealthDown(summon.id)}
+                        >-</button>
+                        <p className='text-5xl' id={summon.id}>{summon.summonHealth}</p>
+                        <button
+                            className='text-5xl'
+                            onClick={() => SummonHealthUp(summon.id)}
+                        >+</button>
+                    </div>
+                    <button
+                        className='self-center'
+                        onClick={() => deleteSummon(summon.id)}
+                    >Kill</button>
+                </div>
+            )
+        })}
+
+        </div>
+
+
+        </>
     )
 }
 
