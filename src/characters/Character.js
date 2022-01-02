@@ -5,9 +5,18 @@ import { nanoid } from 'nanoid';
 
 function Character(){
 
-    const [health, setHealth] = useState(0);
-    const [experience, setExperience] = useState(0);
-    const [gold, setGold] = useState(0);
+    const [health, setHealth] = useState(() => {
+        const health = localStorage.getItem('health');
+        return health ? parseInt(health) : 0;
+    });
+    const [experience, setExperience] = useState(() => {
+        const exp = localStorage.getItem('experience');
+        return exp ? parseInt(exp) : 0;
+    });
+    const [gold, setGold] = useState(() => {
+        const gold = localStorage.getItem('gold');
+        return gold ? parseInt(gold) : 0;
+    });
     const [summons, setSummons] = useState(() => {
         const savedSummons = localStorage.getItem('summons');
         const parsedSummons = JSON.parse(savedSummons);
@@ -75,8 +84,18 @@ function Character(){
 
     useEffect(() => {
         localStorage.setItem('summons', JSON.stringify(summons));
-
     }, [summons]);
+    useEffect(() => {
+        localStorage.setItem('health', JSON.stringify(health));
+    }, [health]);
+    useEffect(() => {
+        localStorage.setItem('experience', JSON.stringify(experience));
+    }, [experience]);
+    useEffect(() => {
+        localStorage.setItem('gold', JSON.stringify(gold));
+    }, [gold]);
+
+
 
     return(
     <div id="sheet-container" className='
