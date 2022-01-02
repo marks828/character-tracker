@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Character from './characters/Character';
+// import Character from './characters/CharacterSummonComponent';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(

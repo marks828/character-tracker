@@ -1,17 +1,18 @@
 import '../index.css'
-import { useState } from 'react';
+import { useState,  useEffect } from 'react';
 import { nanoid } from 'nanoid';
 
 
 function Character(){
 
-    
-
-
     const [health, setHealth] = useState(0);
     const [experience, setExperience] = useState(0);
     const [gold, setGold] = useState(0);
-    const [summons, setSummons] = useState([]);
+    const [summons, setSummons] = useState(() => {
+        const savedSummons = localStorage.getItem('summons');
+        const parsedSummons = JSON.parse(savedSummons);
+        return parsedSummons || [];
+    });
 
     
     function healthUp(){
@@ -72,16 +73,17 @@ function Character(){
         setSummons(deleteSummon);
     }
 
+    useEffect(() => {
+        localStorage.setItem('summons', JSON.stringify(summons));
+
+    }, [summons]);
+
     return(
-        <>
+    <div id="sheet-container" className='
+        
+    '>
         <div id="character-container" className='
-            grid grid-cols-1 
-            sm:grid-cols-1 
-            md:grid-cols-3 
-            lg:grid-cols-3 
-            xl:grid-cols-3 
-            sm:gap-0
-            md:gap-5
+
         '>
         <div className='py-5 bg-red-400'>
             <h1 className='grid justify-items-center'>Health</h1>
@@ -126,10 +128,6 @@ function Character(){
                     onClick={() => setGold(gold + 1)}
                 >+</button>
             </div>
-        </div>
-        
-
-        
 
 
 
@@ -167,16 +165,6 @@ function Character(){
         <button onClick={handleLogClick}>log</button>
         </div>
 
-        <div id="character-container" className='
-            grid grid-cols-1 
-            sm:grid-cols-1 
-            md:grid-cols-3 
-            lg:grid-cols-3 
-            xl:grid-cols-3 
-            sm:gap-0
-            md:gap-5
-        '>
-
             {summons.map(summon => {    // summon is the object in the array
             return(
                 <div className='grid py-5 bg-green-200'>
@@ -200,10 +188,84 @@ function Character(){
             )
         })}
 
+        </div> 
+        {/* end of character container div */}
+        {/* start of perks-and-stats div */}
+        <div id="perks-and-stats" className='
+            
+        '>
+            <div>
+                <label htmlFor="">remove two -1 cards
+                    <input type="checkbox" name="" id="" />
+                    <input type="checkbox" name="" id="" />
+                </label>
+            </div>
+
+            <div>
+                <label htmlFor="">replace one -2 card with one +0
+                    <input type="checkbox" name="" id="" />
+                </label>
+            </div>
+
+            <div>
+                <label htmlFor="">remove four +0 cards
+                    <input type="checkbox" name="" id="" />
+                </label>
+            </div>
+
+            <div>
+                <label htmlFor="">add one +3 card
+                    <input type="checkbox" name="" id="" />
+                </label>
+            </div>
+
+            <div>
+                <label htmlFor="">add one any element card
+                    <input type="checkbox" name="" id="" />
+                </label>
+            </div>
+
+            <div>
+                <label htmlFor="">add three muddle cards
+                    <input type="checkbox" name="" id="" />
+                </label>
+            </div>
+
+            <div>
+                <label htmlFor="">add one wound card
+                    <input type="checkbox" name="" id="" />
+                </label>
+            </div>
+
+            <div>
+                <label htmlFor="">add one immobilize card
+                    <input type="checkbox" name="" id="" />
+                </label>
+            </div>
+
+            <div>
+                <label htmlFor="">add one +1 card +2 heal card
+                    <input type="checkbox" name="" id="" />
+                </label>
+            </div>
+
+            <div>
+                <label htmlFor="">add one +0 plus one target card
+                    <input type="checkbox" name="" id="" />
+                </label>
+            </div>
+
+            <div>
+                <label htmlFor="">add one +0 refresh an item card
+                    <input type="checkbox" name="" id="" />
+                </label>
+            </div>
+                
+            
         </div>
 
 
-        </>
+    </div>
     )
 }
 
