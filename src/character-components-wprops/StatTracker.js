@@ -2,7 +2,8 @@ import { useState } from "react";
 
 export function StatTracker(props){
 
-    const [currentValue, setCurrentValue] = useState(0);
+    const [currentValue, setCurrentValue] = useState(0);;
+
 
     return(
         <div className={`py-5 ${props.bgcolor}

@@ -1,25 +1,51 @@
 import '../index.css'
 import { useState } from 'react';
-// import { nanoid } from 'nanoid';
+import { nanoid } from 'nanoid';
 import { StatTracker } from './StatTracker';
 
 
 function Character(){
 
-    const [statTracker, setStatTracker] = useState(0)
+    const [summons, setSummons] = useState(() => {
+        const savedSummons = localStorage.getItem('summons');
+        const parsedSummons = JSON.parse(savedSummons);
+        return parsedSummons || [];
+    });
 
+    useEffect(() => {
+        localStorage.setItem('summons', JSON.stringify(summons));
+    }, [summons]);
+
+
+    function SummonHealthUp(id){
+        const increaseSummonHealth = summons.map(summon => {
+            if(summon.id === id){
+                
+                console.log(summon)
+                return {...summon, summonHealth: summon.summonHealth + 1};
+            }
+            return summon;
+        })
+        setSummons(increaseSummonHealth);
+    }
     
-    // function handleAddSummonClick(e){
-    //     e.preventDefault();
-    //     console.log('add summon');
-    //     setRenderSummon(true);
-    // }
-
-    function handleLogClick(e){
-        e.preventDefault();
-        // console.log(summons);
+    function SummonHealthDown(id){
+        const decreaseSummonHealth = summons.map(summon => {
+            if(summon.id === id){
+                
+                console.log(summon)
+                return {...summon, summonHealth: summon.summonHealth - 1};
+            }
+            return summon;
+        })
+        setSummons(decreaseSummonHealth);
     }
 
+    function deleteSummon(id) {
+        const deleteSummon = summons.filter(summon => summon.id !== id);
+        console.log(deleteSummon);
+        setSummons(deleteSummon);
+    }
 
     return(
         <div id="character-container" className='
@@ -52,7 +78,7 @@ function Character(){
         
         
 
-        {/* {summons.map(summon => {    // summon is the object in the array
+        {summons.map(summon => {    // summon is the object in the array
             return(
                 <div className='py-5 bg-green-200'>
                     <h1 className='sm:grid justify-items-center'>Summon Health</h1>
@@ -70,8 +96,8 @@ function Character(){
                     <button onClick={() => deleteSummon(summon.id)}>Kill</button>
                 </div>
             )
-        })} */}
-
+        })}
+        
 
 
         {/* map all summons to page */}
@@ -97,9 +123,10 @@ function Character(){
         })}      */}
         
         <button
-            // onClick={() => setSummons([...summons, {id: nanoid(), summonHealth: 0}])}
+            className='self-center'
+            onClick={() => setSummons([...summons, {id: nanoid(), summonHealth: 0}])}
         >Add Summon</button>
-        <button onClick={handleLogClick}>log</button>
+        {/* <button onClick={handleLogClick}>log</button> */}
 
         
         
