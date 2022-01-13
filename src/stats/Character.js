@@ -3,6 +3,7 @@ import Health from './Health';
 import Experience from './Experience';
 import Gold from './Gold';
 import Summons from './Summons';
+import Perks from './perks/Perks';
 
 function Character() {
 	return (
@@ -15,7 +16,9 @@ function Character() {
 			</div>
 			{/* end of character container div */}
 			{/* start of perks-and-stats div */}
-			<div id='perks-and-stats' className=''></div>
+			<div id='perks-and-stats' className=''>
+				<Perks />
+			</div>
 		</div>
 	);
 }
